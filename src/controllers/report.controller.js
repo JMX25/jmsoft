@@ -136,7 +136,6 @@ reportController.processSearchReq = async (req,res) =>{
     entries = await Employee.find({companyId:req.user.id}).lean();
     let startDate2 = new Date(startDate);
     let endDate2 = new Date(endDate);
-    startDate2.setDate(startDate2.getDate()+1);
     endDate2.setDate(endDate2.getDate());
     
     for (entrie of entries){
@@ -218,7 +217,7 @@ reportController.processSearchReq = async (req,res) =>{
     });
     totalHours = totalRegular + totalOvertime;
     totalHourValue = totalRegularValue + totalOvertimeValue;
-    startDate2.setDate(startDate2.getDate()+1);
+    startDate2.setDate(startDate2.getDate());
 
     let data = {
         totalPay,totalOvertime,totalOvertimeValue,
