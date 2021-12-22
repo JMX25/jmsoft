@@ -1,0 +1,137 @@
+<div class="card">
+    <div class="card-header">
+        <h1>Report from <span style="color: #00afb9;">{{startDate}}</span> through <span style="color: #f07167;">{{endDate}}</span></h1>
+        <form action="/reports/save" method="post">
+            <button type="submit" class="btn btn-primary"> SAVE REPORT</button>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="accordion" id="accordionOver">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOver">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOver" aria-expanded="false" aria-controls="collapseOver">
+                            <h3>Overview</h3>
+                        </button>
+                    </h2>
+                    <div id="collapseOver" class="accordion-collapse collapse show " aria-labelledby="headingOver" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">                            
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><h4>Regular Hours:</h4></td>
+                                        <td><div class="text-end"><h4>{{totalRegular}}</h4></div></td>
+                                        <td><div class="text-end"><h4>${{totalRegularValue}}</h4></div></td>
+                                    </tr>                                                    
+                                    <tr>
+                                        <td><h4>Overtime:</h4></td>
+                                        <td><div class="text-end"><h4>{{totalOvertime}}</h4></div></td>
+                                        <td><div class="text-end"><h4>${{totalOvertimeValue}}</h4></div></td>
+                                    </tr>                                                    
+                                    <tr>
+                                        <td><h4>Total Tax:</h4></td>
+                                        <td></td>
+                                        <td><div class="text-end" style="color: red;"><h4>-${{totalTax}}</h4></div></td>
+                                    </tr>                                                
+                                    <tr>
+                                        <td><h4>Net Pay:</h4></td>
+                                        <td></td>
+                                        <td><div class="text-end"><h4>${{totalPay}}</h4></div></td>
+                                    </tr>                                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <hr>
+        {{#each filteredEmployees}}
+            <div class="accordion" id="accordion{{id}}">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading{{id}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="false" aria-controls="collapse{{id}}">
+                            <pre><strong style="font-size: large;">{{name}}</strong><span style="color:rgb(75, 75, 75)">   (Id:{{id}} / Total Hours:{{localT}} / Value: ${{pay}})</span></pre>
+                        </button>
+                    </h2>
+                    <div id="collapse{{id}}" class="accordion-collapse collapse " aria-labelledby="heading{{id}}" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-8">
+                                {{!-- Scroll Component for table --}}
+                                    <div style="position:relative; height:430px; overflow:auto; display:block;">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <th scope="col"><div class="text-start">Date</div></td>
+                                            <th scope="col"><div class="text-center">Hours</div></td>
+                                            <th scope="col"><div class="text-center">Value</div></td>                                        
+                                            <th scope="col"><div class="text-center">Overtime Hours</div></td>
+                                            <th scope="col"><div class="text-center">OverTime Value</div></td>                                        
+                                        </thead>
+                                        <tbody>
+                                        {{#each days}}
+                                        <tr>
+                                            <td><div class="text-start">{{0}}</div></td>
+                                            <td><div class="text-end">{{1}}</div></td>
+                                            <td><div class="text-end">${{2}}</div></td>
+                                            
+                                            <td><div class="text-end">{{8}}</div></td>
+                                            <td><div class="text-end">${{9}}</div></td>                                        
+                                        </tr>
+                                        {{/each}}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>Overview</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Total Hours:</td>
+                                                        <td><div class="text-end">{{localT}}</div></td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td>Total Value:</td>
+                                                        <td><div class="text-end">${{localTV}}</div></td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td>Total Regular Hours:</td>
+                                                        <td><div class="text-end">{{localR}}</div></td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td>Total Regular Value:</td>
+                                                        <td><div class="text-end">${{localRV}}</div></td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td>Total Overtime Hours:</td>
+                                                        <td><div class="text-end">{{localO}}</div></td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td>Total Overtime Value:</td>
+                                                        <td><div class="text-end">${{localOV}}</div></td>
+                                                    </tr>                                                    
+                                                    <tr>
+                                                        <td>Total Tax:</td>
+                                                        <td><div class="text-end" style="color: red;">$-{{dsc}}</div></td>
+                                                    </tr>                                                
+                                                    <tr>
+                                                        <td>Net Pay:</td>
+                                                        <td><div class="text-end">${{pay}}</div></td>
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        {{/each}}
+    </div>        
+</div>

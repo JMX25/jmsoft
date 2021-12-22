@@ -1,0 +1,36 @@
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>From</th>
+            <th>Through</th>
+            <th>Regular Hs</th>
+            <th>Overtime Hs</th>
+            <th>Tax</th>
+            <th>Payout</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each reports}}
+            <tr>
+                <td>{{startDate}}</td>
+                <td>{{endDate}}</td>
+                <td>{{totalRegular}}</td>
+                <td>{{totalOvertime}}</td>
+                <td>{{totalTax}}</td>
+                <td>${{totalPay}}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-6"><a href="/reports/view/{{_id}}" class="btn btn-primary btn-block"><i class="fa fa-eye"></i></a></div>
+                        <div class="col-6">
+                            <form action="/reports/delete/{{_id}}?_method=DELETE" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger btn-block" type="submit"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

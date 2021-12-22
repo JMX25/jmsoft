@@ -1,0 +1,17 @@
+<div class="card col-8 mx-auto">
+    <div class="card-header">
+        <h1>Adding New Employee Data</h1>
+    </div>
+    <div class="card-body">
+        <form action="/reports/new" method="POST" enctype="multipart/form-data">
+
+            <h4>Please Upload a .csv file</h4>
+            <div class="form-group row pt-4">
+            <input type="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required/>
+            </div>
+            <br>
+            <button id="btn" type="submit" class="btn btn-primary btn-block">OK</button>
+            <a id="btn2" href="/dashboard" class="btn btn-danger btn-block">Cancel</a>
+        </form>
+    </div>
+</div>
